@@ -1,0 +1,158 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Assets/Font/RubikMonoOne-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Images/background/Untitled design.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Custom2D/Custom2D_btn.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Custom2D/Custom2D.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Images/button/forward.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Custom2D/Kartesian_check_btn.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Images/title/Baju_sebelum_dilakukan_proses_packing-removebg-preview.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/title/mesin text.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/title/paket-removebg-preview.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/title/mobil-removebg-preview.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sound/bgmusic.mp3" type="AudioStream" id=11]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+use_filter = true
+extra_spacing_top = 2
+extra_spacing_bottom = 2
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.12549, 0.678431, 0.709804, 1 )
+border_width_left = 2
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 1
+border_color = Color( 0.0156863, 0.0705882, 0.0745098, 1 )
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Custom2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="KaryaLayer" type="CanvasLayer" parent="."]
+
+[node name="Baju" type="Node2D" parent="KaryaLayer"]
+visible = false
+script = ExtResource( 4 )
+
+[node name="JudulBaju" type="TextureRect" parent="KaryaLayer/Baju"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 248.0
+margin_top = 31.0
+margin_right = 1148.0
+margin_bottom = 161.0
+texture = ExtResource( 7 )
+
+[node name="Mesin" type="Node2D" parent="KaryaLayer"]
+visible = false
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="KaryaLayer/Mesin"]
+margin_left = 250.0
+margin_top = 34.0
+margin_right = 1150.0
+margin_bottom = 164.0
+texture = ExtResource( 8 )
+
+[node name="Paket" type="Node2D" parent="KaryaLayer"]
+visible = false
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="KaryaLayer/Paket"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 248.0
+margin_top = 34.0
+margin_right = 1148.0
+margin_bottom = 164.0
+texture = ExtResource( 9 )
+
+[node name="MobilPaket" type="Node2D" parent="KaryaLayer"]
+visible = false
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="KaryaLayer/MobilPaket"]
+margin_left = 242.0
+margin_top = 34.0
+margin_right = 1142.0
+margin_bottom = 164.0
+texture = ExtResource( 10 )
+
+[node name="HelperLayer" type="CanvasLayer" parent="KaryaLayer"]
+
+[node name="Back_btn" type="Button" parent="KaryaLayer/HelperLayer"]
+margin_left = 25.0
+margin_top = 21.0
+margin_right = 112.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+text = "Back"
+script = ExtResource( 3 )
+
+[node name="Next_btn" type="Button" parent="KaryaLayer/HelperLayer"]
+margin_left = 1290.0
+margin_top = 11.0
+margin_right = 1357.0
+margin_bottom = 72.0
+icon = ExtResource( 5 )
+flat = true
+expand_icon = true
+script = ExtResource( 3 )
+
+[node name="Prev_btn" type="Button" parent="KaryaLayer/HelperLayer"]
+margin_left = 1292.0
+margin_top = 72.0
+margin_right = 1360.0
+margin_bottom = 133.0
+rect_rotation = 180.163
+icon = ExtResource( 5 )
+flat = true
+expand_icon = true
+script = ExtResource( 3 )
+
+[node name="HelperLayer2" type="CanvasLayer" parent="KaryaLayer/HelperLayer"]
+
+[node name="Kartesian_btn" type="CheckButton" parent="KaryaLayer/HelperLayer/HelperLayer2"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 76.0
+text = "Kertesian"
+script = ExtResource( 6 )
+
+[node name="Kartesian" type="Node2D" parent="KaryaLayer/HelperLayer/HelperLayer2"]
+visible = false
+script = ExtResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+autoplay = true
+
+[connection signal="draw" from="KaryaLayer/Baju" to="KaryaLayer/Baju" method="draw_baju"]
+[connection signal="draw" from="KaryaLayer/Mesin" to="KaryaLayer/Mesin" method="draw_machines"]
+[connection signal="draw" from="KaryaLayer/Paket" to="KaryaLayer/Paket" method="draw_packet"]
+[connection signal="draw" from="KaryaLayer/MobilPaket" to="KaryaLayer/MobilPaket" method="draw_car"]
+[connection signal="pressed" from="KaryaLayer/HelperLayer/Back_btn" to="KaryaLayer/HelperLayer/Back_btn" method="_on_Back_btn_pressed"]
+[connection signal="pressed" from="KaryaLayer/HelperLayer/Next_btn" to="KaryaLayer/HelperLayer/Next_btn" method="_on_Next_btn_pressed"]
+[connection signal="pressed" from="KaryaLayer/HelperLayer/Prev_btn" to="KaryaLayer/HelperLayer/Prev_btn" method="_on_Prev_btn_pressed"]
+[connection signal="pressed" from="KaryaLayer/HelperLayer/HelperLayer2/Kartesian_btn" to="KaryaLayer/HelperLayer/HelperLayer2/Kartesian_btn" method="_on_Kartesian_btn_pressed"]
+[connection signal="draw" from="KaryaLayer/HelperLayer/HelperLayer2/Kartesian" to="KaryaLayer/HelperLayer/HelperLayer2/Kartesian" method="draw_kartesian"]
